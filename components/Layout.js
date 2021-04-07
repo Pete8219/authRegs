@@ -5,7 +5,7 @@ import Navbar from './Navbar'
 const Layout = ( { children }) => (
     <>
         <Head>
-            <title>AuthRegs App</title>
+            <title>Регламенты управления</title>
         </Head>
 
         <Navbar/>

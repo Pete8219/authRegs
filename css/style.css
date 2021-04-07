@@ -1,10 +1,22 @@
 h1 {
     text-align: center;
 }
+
+
 .wrapper {
     max-width: 1200px;
     padding: 0 16px;
-    margin: auto;
+    margin: 0 auto;
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+
+
+}
+.table-container {
+    margin:0 auto;
+    width:80%;
+    padding:2rem;
 
 }
 
@@ -21,6 +33,7 @@ h1 {
 .navbar .create {
     color:#fff;
     font-size: 1.5rem;
+    text-align:right;
 }
 
 .navbar .navbar-brand {
@@ -29,4 +42,20 @@ h1 {
 }
 .navbar-brand:hover, .create:hover {
     color:#fff;
+}
+
+.menu {
+    width:50%;
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: end;
+
+}
+ .menu a {
+     margin-right:1rem;
+ }
+
+.form-container {
+    width:600px;
+    margin: 0 auto;
 }

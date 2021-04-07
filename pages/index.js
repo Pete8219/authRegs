@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Button, Card } from 'semantic-ui-react'
 
-const  Home = ( {data }) => {
+const  CategoryList = ( {data }) => {
   if(!data) {
     return (
       <p>Loading ...</p>
@@ -9,27 +9,44 @@ const  Home = ( {data }) => {
   }
   
   return (
-    <div>
-      <h1>Home Page</h1>
-        
-            { data.map( user => {
+    <div className="notes-container">
+      <h1>Выберите категорию</h1>
+        <div className="grid wrapper">
+            { data.map( category => {
               return (
-                <Card>{user.name}{' '}{user.email}</Card>
-                  
+                <div key ={ category._id}>
+                    <Card>
+                      <Card.Content>
+                          <Card.Header>
+                            <Link href={`/${category._id}`}>
+                                <a>{category.title}</a>
+                            </Link>
+                          </Card.Header>
+
+                      </Card.Content>
+                      <Card.Content extra>
+                      <Link href={`/${category._id}`}>
+                        <Button primary>View</Button>
+                      </Link>
+                      <Link href={`/${category._id}/edit`}>
+                        <Button primary>Edit</Button>
+                      </Link>
+                      </Card.Content>
+                     </Card>
+                </div>  
               )
               
             })}
-       
+      </div> 
     </div>
   )
 }
 
 export async function getStaticProps() {
-  const result = await fetch('http://localhost:3000/api/users')
+  const result = await fetch(`${process.env.SERVER}/api/categories`)
   
   const { data } = await result.json()
 
-  console.log(data)
 
   return {
     props: { data }
@@ -37,4 +54,4 @@ export async function getStaticProps() {
 
 }
 
-export default Home
+export default CategoryList

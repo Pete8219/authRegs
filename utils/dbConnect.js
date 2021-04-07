@@ -3,9 +3,9 @@ import mongoose from 'mongoose'
 
 const connection = {}
 
-async function dbConnect() {
+async function dbConnect()  {
     if(connection.isConnected) {
-        return;
+        return ;
     }
 
     const db = await mongoose.connect(process.env.MONGO_URI, {

@@ -1,5 +1,6 @@
 import dbConnect from '../../../utils/dbConnect'
-import User from '../../../models/User'
+
+import Category from '../../../models/Category'
 
 dbConnect()
 
@@ -12,13 +13,13 @@ export default async (req, res) => {
     switch(method) {
         case 'GET':
             try {
-                const user = await User.findById(id)
+                const category = await Category.findById(id)
 
-                if(!user) {
+                if(!category) {
                     return res.status(400).json({ success: false})
                 }
 
-                res.status(200).json({ success: true, data: user })
+                res.status(200).json({ success: true, data: category })
             } catch (error) {
                 res.status(400).json({ success: false })
                 
@@ -26,16 +27,16 @@ export default async (req, res) => {
             break
         case 'PUT' :
             try {
-                const user = await User.findByIdAndUpdate(id, req.body, {
+                const category = await Category.findByIdAndUpdate(id, req.body, {
                     new: true,
                     runValidators: true
                 });
 
-                if(!user) {
+                if(!category) {
                     return res.status(400).json({ success: false})
                 }
 
-                res.status(200).json({ success: true, data: user})
+                res.status(200).json({ success: true, data: category})
             } catch (error) {
 
                 res.status(400).json({ success: false })
@@ -45,9 +46,9 @@ export default async (req, res) => {
 
         case 'DELETE' :
             try {
-                const user = await User.findByIdAndDelete({_id: id})
+                const category = await Category.findByIdAndDelete({_id: id})
 
-                if(!user) {
+                if(!category) {
                     return res.status(400).json({ success: false})
                 }
 
