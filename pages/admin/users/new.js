@@ -18,10 +18,9 @@ const NewUser = () => {
         if(isSubmitting) {
 
             if(Object.keys(errors).length == 0 ) {
-                console.log('yapp')
+                
                 createUser()
-                
-                
+                          
             } else {
                 setIsSubmitting(false)
             }
@@ -52,30 +51,18 @@ const NewUser = () => {
          
          setErrors(errs)
          setIsSubmitting(true)
-    /*      setForm( {
-            name:'',
-            email: '',
-            password: '',
-            isAdmin: false
 
-        }) */
      }
 
      const handleChange = (e) => {
-         const target = e.target
-        
-        const value = target.type === 'checkbox' ? console.log('dfgdfgdf') : target.value
+        const target = e.target
+        const value = target.type === 'checkbox' ? target.checked : target.value
         const name = target.name
-         setForm({
+        
+        setForm({
              ...form,
              [name]: value
          })
-     }
-
-     const handleChecked = (e) => {
-         if (e.target.checked) {
-             console.log(e.target.value)
-         }
      }
 
      const validate = () => {
@@ -124,23 +111,7 @@ const NewUser = () => {
                             name='email'
                             onChange={handleChange}
                         /> 
-                            <Form.Field>
-                           <label>
-                               Поставить админом??
-                           
-                           <input
-                             type="checkbox"
-                             name='isAdmin'
-                             checked={form.isAdmin}
-                             onChange={handleChange}
-                              />
-                          </label>
-                          </Form.Field>
-                           
-                            
-                            
-                             
-                        
+                        <Form.Field label="Администратор" control="input" type="checkbox" name='isAdmin' checked={form.isAdmin} onChange={handleChange}/>
 
                         <Button type='submit'>Create</Button>   
 
