@@ -59,3 +59,14 @@ h1 {
     width:600px;
     margin: 0 auto;
 }
+
+.user-checkbox {
+    line-height:15px;
+    margin-top:30px !important;
+}
+
+.user-checkbox input[type=checkbox] {
+    
+    margin-right: 15px;
+   
+}

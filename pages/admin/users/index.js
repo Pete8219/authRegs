@@ -1,13 +1,25 @@
 import Link from 'next/link'
 import { Router, useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-import { Button, Card, Icon, Label, Menu, Table, TableCell, Popup} from 'semantic-ui-react'
+import { Form, Button, Card, Icon, Label, Menu, Table, TableCell, Popup, Modal} from 'semantic-ui-react'
 
 const  UsersList = ( { data }) => {
 
   const router = useRouter()
   const [isDeleting, setIsDeleting] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [errors, setErrors] = useState({})
 
+  const [form, setForm] = useState( {
+    name:'',
+    email: '',
+    password: '',
+    isAdmin: false
+ })
+
+
+const handleSubmit = () => {}
+const handleChange = () => {}
 
   const handleDelete = async (id) => {
 
@@ -26,6 +38,56 @@ const  UsersList = ( { data }) => {
   
   return (
     <div >
+
+      <Modal
+        onClose={() => setOpen(false)}
+        onOpen={() => setOpen(true)}
+        open = {open}
+        trigger = {<Button>Show Modal</Button>}
+      >
+        <Modal.Content>
+        <Form onSubmit={handleSubmit}>
+                        <Form.Input
+                            fluid
+                            error={errors.name ? { content: 'Введите имя пользователя', pointing: 'below'}: null}
+                            label="Имя"
+                            placeholder='Name'
+                            name='name'
+                            onChange={handleChange}
+                        />
+                        <Form.Input
+                            fluid
+                            error={errors.password ? { content: 'Введите пароль', pointing: 'below'}: null}
+                            label='Пароль'                            
+                            placeholder='Password'
+                            name='password'
+                            onChange={handleChange}
+                        /> 
+                          <Form.Input
+                            fluid
+                            error={errors.email ? { content: 'Введите email', pointing: 'below'}: null}
+                            label='Email'                            
+                            placeholder='Email'
+                            name='email'
+                            onChange={handleChange}
+                        /> 
+                        <Form.Field label="Администратор" control="input" className="user-checkbox" type="checkbox" name='isAdmin' checked={form.isAdmin} onChange={handleChange}/>
+
+                          
+
+                    </Form>
+        </Modal.Content>
+
+        <Modal.Actions>
+          <Button color='blue' onClick={ () => setOpen(false)}>
+            Закрыть
+          </Button>
+        </Modal.Actions>
+        
+
+      </Modal>
+
+
       <h1>Список пользователей</h1>
         <div className="table-container">
             <Table celled>
@@ -35,7 +97,7 @@ const  UsersList = ( { data }) => {
                         <Table.HeaderCell>Пользователь</Table.HeaderCell>
                         <Table.HeaderCell>Email</Table.HeaderCell>
                         <Table.HeaderCell>Роль</Table.HeaderCell>
-                        <Table.HeaderCell>Удалить</Table.HeaderCell>
+                        <Table.HeaderCell></Table.HeaderCell>
                        
                     </Table.Row>
                 </Table.Header>
@@ -82,10 +144,7 @@ export async function getStaticProps() {
     props: {
       data,
     },
-    // Next.js will attempt to re-generate the page:
-    // - When a request comes in
-    // - At most once every second
-    revalidate: 1, // In seconds
+    
   }
 
 }
