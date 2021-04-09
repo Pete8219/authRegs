@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { Button, Form, Loader, Checkbox } from 'semantic-ui-react'
+import { Button, Form, Loader } from 'semantic-ui-react'
 import { useRouter } from 'next/router'
 
 const NewUser = () => {
@@ -38,7 +38,9 @@ const NewUser = () => {
                  },
                  body: JSON.stringify(form)
              })
-             router.push(`${process.env.SERVER}/admin/users`)
+        
+           router.push(`${process.env.SERVER}/admin/users`)
+
          } catch (error) {
              console.log(error)
          }

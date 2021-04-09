@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { Router, useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
+import  NewUser   from './new'
+import { createUser } from './new'
 import { Form, Button, Card, Icon, Label, Menu, Table, TableCell, Popup, Modal} from 'semantic-ui-react'
 
 const  UsersList = ( { data }) => {
@@ -8,18 +10,9 @@ const  UsersList = ( { data }) => {
   const router = useRouter()
   const [isDeleting, setIsDeleting] = useState(false)
   const [open, setOpen] = useState(false)
-  const [errors, setErrors] = useState({})
-
-  const [form, setForm] = useState( {
-    name:'',
-    email: '',
-    password: '',
-    isAdmin: false
- })
 
 
-const handleSubmit = () => {}
-const handleChange = () => {}
+
 
   const handleDelete = async (id) => {
 
@@ -46,36 +39,7 @@ const handleChange = () => {}
         trigger = {<Button>Show Modal</Button>}
       >
         <Modal.Content>
-        <Form onSubmit={handleSubmit}>
-                        <Form.Input
-                            fluid
-                            error={errors.name ? { content: 'Введите имя пользователя', pointing: 'below'}: null}
-                            label="Имя"
-                            placeholder='Name'
-                            name='name'
-                            onChange={handleChange}
-                        />
-                        <Form.Input
-                            fluid
-                            error={errors.password ? { content: 'Введите пароль', pointing: 'below'}: null}
-                            label='Пароль'                            
-                            placeholder='Password'
-                            name='password'
-                            onChange={handleChange}
-                        /> 
-                          <Form.Input
-                            fluid
-                            error={errors.email ? { content: 'Введите email', pointing: 'below'}: null}
-                            label='Email'                            
-                            placeholder='Email'
-                            name='email'
-                            onChange={handleChange}
-                        /> 
-                        <Form.Field label="Администратор" control="input" className="user-checkbox" type="checkbox" name='isAdmin' checked={form.isAdmin} onChange={handleChange}/>
-
-                          
-
-                    </Form>
+          <NewUser/>
         </Modal.Content>
 
         <Modal.Actions>
